@@ -1,6 +1,7 @@
-/******************************************************************* */
+/*
                             Elementos
-/********************************************************************/
+____________________________________________________________________
+*/
 
 //Botones
 const btnBalance = document.getElementById('btn-balance');
@@ -41,7 +42,7 @@ const inputFecha = document.getElementById('input-fecha');
 const btnCancelar = document.getElementById('btn-cancelar');
 const btnAgregar = document.getElementById('btn-agregar');
 
-//Tabla de operaciones
+//TTabla peraciones
 const tablaOperaciones = document.getElementById("tabla-operaciones");
 const verSinOperaciones = document.getElementById("ver-sin-operaciones");
 
@@ -85,12 +86,12 @@ burgerMenu.addEventListener("click", () => {
 })
 
 
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*
                             Funcionalidades
+____________________________________________________________________
+*/
 
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-//Botones
+//--------------Botones-------------------
 
 //Botón balance
 btnBalance.addEventListener('click', () => {
@@ -173,7 +174,9 @@ const generateId = () => {
   return `${p1}${p2}`;
 };
 
-//Creación de categorías
+//NUEVA OPERACIÓN
+
+//Creando categorías
 let categories = [
   { id: 0, name: "Servicios" },
   { id: 1, name: "Trasporte" },
@@ -207,6 +210,8 @@ const checkearOperaciones = (operaciones) => {
 let operaciones = [];
 let balance = [];
 
+//AGREGAR OPERACIÓN
+
 
 //Botón agregar operación
 btnAgregar.addEventListener('click', () => {
@@ -232,7 +237,8 @@ btnAgregar.addEventListener('click', () => {
   escribirOperacion(tomarOperacionesStorage);
   balanceHTML(tomarOperacionesStorage);
   filtrarOperaciones(tomarOperacionesStorage);
-  
+  /*paginaReportes(tomarOperacionesStorage);*/
+
   //Volver a Balance
   paginaBalance.style.display = 'block'
   paginaNuevaOperacion.style.display = 'none' 
@@ -253,20 +259,24 @@ const escribirOperacion = (operaciones) => {
           <div class="column is-3-tablet is-6-mobile">
             <h3 class="has-text-weight-semibold is-size-6">${operaciones[i].descripcion}</h3>
           </div>
+
           <div class="column is-3-tablet is-6-mobile has-text-right-mobile">
             <span class="tag is-info is-light is-rounded is-size-6">${operaciones[i].categoria}</span>
           </div>
+
           <div class="column is-2-tablet has-text-grey is-hidden-mobile has-text-left-tablet is-size-6">
           ${operaciones[i].fecha}
           </div>
           
           <div class="column is-2 has-text-right is-size-6 ${operaciones[i].tipo === 'ganancia' ? 'tag is-primary is-light is-rounded' : 'tag is-danger is-light is-rounded'}">
           $${operaciones[i].monto}</div>
+
           <div class="column is-2-tablet has-text-right">
             <button class="button is-inverted tag is-link is-size-6" onclick="editarOperacion('${operaciones[i].id}')"><i class="fas fa-pen"></i></i></button>
             <button class="button is-inverted tag is-danger is-size-6" onclick="eliminarOperacion('${operaciones[i].id}')"><i class="fas fa-trash-alt"></i></button>
           </div>
         </div>
+
       </div>
     </div>`
 
@@ -280,6 +290,7 @@ checkearOperaciones(operaciones);
 
 //EDITAR OPERACIONES
 
+// posición en el arrego de la operación a editar
 let posicion;
 
 const editarOperacion = (operacion) => {
@@ -465,6 +476,7 @@ main();
  ************************************************************************************
 */
 
+//Botón ocultar-mostrar filtros
 btnOcultarFiltros.addEventListener('click', () => {
   if (btnOcultarFiltros.innerText === 'Ocultar filtros') {
     btnOcultarFiltros.innerText = 'Mostrar filtros'
@@ -786,6 +798,7 @@ const getMaximosMes = (campo) => {
     for (let mes = 0; mes <= 12; mes++) {
       let datex = new Date(2021, mes, 04);
       let month = datex.toLocaleString("default", { month: "long" });
+      //console.log("EJEMPLO", mes, datex, month);
       let itemReport = {
         mes: mes,
         mesName: month,
@@ -828,3 +841,4 @@ const getMaximosMes = (campo) => {
       monto: maxGastoMes.gasto,
     });
   };
+   
