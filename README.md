@@ -7,7 +7,7 @@ _Te invito a que lo conozcas haciendo click en este [enlace](https://florocampo.
 
 ## Descargá el código 💻
 Para obtener el _código de este proyecto_ tenes que seguir estos pasos:
-* Ir al [repositorio](https://florocampo.github.io/proyectoahorradas/)
+* Ir al [repositorio](https://github.com/florocampo/proyectoahorradas)
 * Hacer click en el **botón fork**
 * Desplegar el **botón code** y copiar la URL.
 * Abrir tu terminal y ejecutar el comando **git clone**, espacio y pega la URL que copiaste con anterioridad. 
