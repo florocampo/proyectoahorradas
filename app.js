@@ -192,6 +192,8 @@ const operationsHtml = (operations) => {
   addNewOperation.innerHTML = "";
   for (let i = 0; i < operations.length; i++) {
     const monto =
+    // no hay ninguna diferencia entre las dos - te faltó un signo - en el else?
+    // o agregaste la linea de * -1 despues y olvidaste esta?
       operations[i].tipo === "Ganancia"
         ? `$${operations[i].monto}`
         : `$${operations[i].monto}`;
@@ -216,6 +218,7 @@ const operationsHtml = (operations) => {
   }
 };
 
+// no vimos el operador ?? - tenes en claro lo que hace?
 operations =
   JSON.parse(localStorage.getItem("operacionesStorage")) ?? operations;
 operationsHtml(operations);
@@ -240,6 +243,8 @@ const ShowSectionOperations = () => {
 };
 
 // posición en el arrego de la operación a editar
+
+// deberia estar declarada dentro de la funcion que va a usar esta variable
 let position;
 const editOperation = (operation) => {
   hideSectionsEditOperation();
@@ -333,6 +338,7 @@ const editCategory = (category) => {
 };
 
 btnEditCategory.addEventListener("click", () => {
+  // no vimos la sintaxis de bracket notation - solo usala si estas 100% segura de como funciona
   categories[resultado.i].nombre = inputEditCategory.value;
   localStorage.setItem("categoriasStorage", JSON.stringify(categories));
   categoriesHTML(categories);
@@ -411,11 +417,16 @@ const categoriesSelect = (categories) => {
 
 categories =
   JSON.parse(localStorage.getItem("categoriasStorage")) ?? categories;
+
+  // estas ejecuciones, que se ejecutan apenas carga la pagina, son dificiles de encontrar 
+  // si estan en medio de las funciones auxiliares
+  // ponelas todas juntas al final de todo
 categoriesHTML(categories);
 categoriesSelect(categories);
 
 // BALANCE
 
+// esta funcion esta exactamente igual a la del modelo de Ada 
 const balanceData = (operaciones) => {
   return operaciones.reduce(
     (balance, operacion) => {
@@ -457,6 +468,7 @@ const balanceHTML = (operaciones) => {
     balanceTotal.classList.add("has-text-danger");
   }
 
+  // estas usando mal la bracket notation aqui - mejor usar la sintaxis tradicional de objetos
   balanceGanancia.innerHTML = `$${objBalance["ganancias"]}`;
   balanceGasto.innerHTML = `$${objBalance["gastos"]}`;
   balanceTotal.innerHTML = `$${objBalance["total"]}`;
@@ -531,6 +543,7 @@ const filtrarOperaciones = () => {
 
   operaciones = filtrarFechaMayorOIgual(fecha, operaciones);
 
+  // esto está muy similar al modelo de Ada - tratá de hacerlo nuevamente a tu propia manera
   switch (orden) {
     case "Mas reciente":
       operaciones = ordenarMasMenosReciente(operaciones, "DESC");
@@ -585,6 +598,7 @@ const reportes = (operaciones) => {
 
 let resultGastosGananciasCateg = {};
 
+// esta muy bien esta funcion!
 const gastosGananciasCateg = (operaciones) => {
   const parcial = [];
 
@@ -674,6 +688,7 @@ const resumenCategHTML = (objeto, caja, tipo, color) => {
 
 // REPORTES POR MES
 
+// esta funcion esta casi igual a la de Ada
 const obtenerResumenMeses = (operaciones) => {
   const resumen = {
     mayorGanancia: {
@@ -735,6 +750,7 @@ const totalesPorMesHTML = (objeto) => {
   }
 };
 
+// esta funcion esta igual a la de Ada
 const obtenerTotalesPorMes = (operaciones) => {
   return operaciones.reduce((totales, operacion) => {
     let fecha = new Date(operacion.fecha);
